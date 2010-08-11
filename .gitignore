@@ -1,0 +1,11 @@
+/build/*
+/dist/*
+/src/Ninject.Extensions.DependencyCreation.5.0.ReSharper.user
+/src/Ninject.Extensions.DependencyCreation.5.1.TeamCity.user
+/src/Ninject.Extensions.DependencyCreation.Test/obj/*
+/src/_ReSharper.Ninject.Extensions.DependencyCreation/*
+/src/Ninject.Extensions.DependencyCreation.suo
+/src/Ninject.Extensions.DependencyCreation/Ninject.Extensions.DependencyCreation.5.0.ReSharper.user
+/src/Ninject.Extensions.DependencyCreation/Ninject.Extensions.DependencyCreation.5.1.TeamCity.user
+/src/Ninject.Extensions.DependencyCreation/Ninject.Extensions.DependencyCreation.csproj.user
+/src/Ninject.Extensions.DependencyCreation/obj/*
