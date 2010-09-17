@@ -9,3 +9,9 @@
 /src/Ninject.Extensions.DependencyCreation/Ninject.Extensions.DependencyCreation.5.1.TeamCity.user
 /src/Ninject.Extensions.DependencyCreation/Ninject.Extensions.DependencyCreation.csproj.user
 /src/Ninject.Extensions.DependencyCreation/obj/*
+/lib/Ninject/*.zip
+/lib/Ninject/*/**
+/lib/Ninject.Extensions.ContextPreservation/*.zip
+/lib/Ninject.Extensions.ContextPreservation/*/**
+/lib/Ninject.Extensions.NamedScope/*.zip
+/lib/Ninject.Extensions.NamedScope/*/**
