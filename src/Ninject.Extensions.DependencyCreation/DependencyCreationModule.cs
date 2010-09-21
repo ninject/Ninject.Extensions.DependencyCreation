@@ -20,6 +20,7 @@ namespace Ninject.Extensions.DependencyCreation
 {
     using System;
     using Ninject.Activation.Strategies;
+    using Ninject.Extensions.ContextPreservation;
     using Ninject.Modules;
     using Ninject.Planning.Strategies;
 
@@ -33,7 +34,7 @@ namespace Ninject.Extensions.DependencyCreation
         /// </summary>
         public override void Load()
         {
-            if (this.Kernel.HasModule("ContextPreservationModule"))
+            if (!this.Kernel.HasModule(typeof(ContextPreservationModule).Name))
             {
                 throw new InvalidOperationException("ContextPreservationModule is required");    
             }

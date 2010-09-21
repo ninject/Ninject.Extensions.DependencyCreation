@@ -20,6 +20,8 @@ namespace Ninject.Extensions.DependencyCreation.Test
 {
     using System.Collections.Generic;
     using System.Linq;
+
+    using Ninject.Extensions.ContextPreservation;
     using Ninject.Extensions.NamedScope;
     using Xunit;
 
@@ -44,6 +46,7 @@ namespace Ninject.Extensions.DependencyCreation.Test
         public DependencyCreationTest()
         {
             this.kernel = new StandardKernel(new NinjectSettings { LoadExtensions = false });
+            this.kernel.Load(new ContextPreservationModule());
             this.kernel.Load(new NamedScopeModule());
             this.kernel.Load(new DependencyCreationModule());
         }
