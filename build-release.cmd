@@ -1,5 +1,5 @@
 @echo off
-set nantfile=Ninject.Extensions.DependencyCreation.build
+set nantfile=Ninject.build
 set nantexe=tools\nant\nant.exe
 set buildlog=Ninject.Extensions.DependencyCreation-Nant-Build.log
 set unittestlog=Ninject.Extensions.DependencyCreation-Nant-unit-tests.log

@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Dependen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation.Test", "Ninject.Extensions.DependencyCreation.Test\Ninject.Extensions.DependencyCreation.Test.csproj", "{FC547AF3-7BF2-4D45-9DBC-F23BAFAFDF25}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation.SilverlightTest", "Ninject.Extensions.DependencyCreation.SilverlightTests\Ninject.Extensions.DependencyCreation.SilverlightTest.csproj", "{AA905C0A-982D-4761-85A6-2C4E6209B2AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{FC547AF3-7BF2-4D45-9DBC-F23BAFAFDF25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC547AF3-7BF2-4D45-9DBC-F23BAFAFDF25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC547AF3-7BF2-4D45-9DBC-F23BAFAFDF25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA905C0A-982D-4761-85A6-2C4E6209B2AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA905C0A-982D-4761-85A6-2C4E6209B2AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA905C0A-982D-4761-85A6-2C4E6209B2AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA905C0A-982D-4761-85A6-2C4E6209B2AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

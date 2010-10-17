@@ -20,14 +20,30 @@ namespace Ninject.Extensions.DependencyCreation.Test
 {
     using System.Collections.Generic;
     using System.Linq;
-
     using Ninject.Extensions.ContextPreservation;
     using Ninject.Extensions.NamedScope;
+#if SILVERLIGHT
+#if SILVERLIGHT_MSTEST
+    using MsTest.Should;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Assert = Ninject.SilverlightTests.AssertWithThrows;
+    using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
+#else
+    using UnitDriven;
+    using UnitDriven.Should;
+    using Assert = Ninject.SilverlightTests.AssertWithThrows;
+    using Fact = UnitDriven.TestMethodAttribute;
+#endif
+#else
+    using Ninject.Extensions.NamedScope.MSTestAttributes;
     using Xunit;
+    using Xunit.Should;
+#endif
 
     /// <summary>
     /// Integration Test for Dependency Creation Module.
     /// </summary>
+    [TestClass]
     public class DependencyCreationTest
     {
         /// <summary>
@@ -38,19 +54,16 @@ namespace Ninject.Extensions.DependencyCreation.Test
         /// <summary>
         /// The kernel used in the tests.
         /// </summary>
-        private readonly IKernel kernel;
+        private IKernel kernel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DependencyCreationTest"/> class.
         /// </summary>
         public DependencyCreationTest()
         {
-            this.kernel = new StandardKernel(new NinjectSettings { LoadExtensions = false });
-            this.kernel.Load(new ContextPreservationModule());
-            this.kernel.Load(new NamedScopeModule());
-            this.kernel.Load(new DependencyCreationModule());
+            this.SetUp();
         }
-        
+
         /// <summary>
         /// Finalizes an instance of the <see cref="DependencyCreationTest"/> class.
         /// </summary>
@@ -62,8 +75,24 @@ namespace Ninject.Extensions.DependencyCreation.Test
         /// <summary>
         /// Test interface for the parent.
         /// </summary>
-        private interface IParent
+        public interface IParent
         {
+        }
+
+        /// <summary>
+        /// Sets up all tests.
+        /// </summary>
+        [TestInitialize]
+        public void SetUp()
+        {
+#if !SILVERLIGHT
+            this.kernel = new StandardKernel(new NinjectSettings { LoadExtensions = false });
+#else
+            this.kernel = new StandardKernel();
+#endif
+            this.kernel.Load(new ContextPreservationModule());
+            this.kernel.Load(new NamedScopeModule());
+            this.kernel.Load(new DependencyCreationModule());
         }
         
         /// <summary>
@@ -80,15 +109,15 @@ namespace Ninject.Extensions.DependencyCreation.Test
 
             Parent parent1 = this.kernel.Get<Parent>();
             Parent parent2 = this.kernel.Get<Parent>();
-            Assert.False(dependencies[0].IsDisposed);
-            Assert.False(dependencies[1].IsDisposed);
+            dependencies[0].IsDisposed.ShouldBeFalse();
+            dependencies[1].IsDisposed.ShouldBeFalse();
 
             parent2.Dispose();
-            Assert.False(dependencies[0].IsDisposed);
-            Assert.True(dependencies[1].IsDisposed);
+            dependencies[0].IsDisposed.ShouldBeFalse();
+            dependencies[1].IsDisposed.ShouldBeTrue();
 
             parent1.Dispose();
-            Assert.True(dependencies[0].IsDisposed);
+            dependencies[0].IsDisposed.ShouldBeTrue();
         }
 
         /// <summary>
@@ -106,7 +135,7 @@ namespace Ninject.Extensions.DependencyCreation.Test
 
             this.kernel.Get<Parent>();
 
-            Assert.True(dependencyCreated);
+            dependencyCreated.ShouldBeTrue();
         }
 
         /// <summary>
@@ -127,10 +156,10 @@ namespace Ninject.Extensions.DependencyCreation.Test
             Parent parent = this.kernel.Get<Parent>();
             parent.Dispose();
 
-            Assert.NotNull(dependency1);
-            Assert.NotNull(dependency2);
-            Assert.True(dependency1.IsDisposed);
-            Assert.True(dependency2.IsDisposed);
+            dependency1.ShouldNotBeNull();
+            dependency2.ShouldNotBeNull();
+            dependency1.IsDisposed.ShouldBeTrue();
+            dependency2.IsDisposed.ShouldBeTrue();
         }
 
         /// <summary>
@@ -151,30 +180,30 @@ namespace Ninject.Extensions.DependencyCreation.Test
             Parent parent = this.kernel.Get<Parent>();
             parent.Dispose();
 
-            Assert.NotNull(dependency1);
-            Assert.NotNull(dependency2);
-            Assert.True(dependency1.IsDisposed);
-            Assert.True(dependency2.IsDisposed);
+            dependency1.ShouldNotBeNull();
+            dependency2.ShouldNotBeNull();
+            dependency1.IsDisposed.ShouldBeTrue();
+            dependency2.IsDisposed.ShouldBeTrue();
         }
 
         /// <summary>
         /// The parent object.
         /// </summary>
-        private class Parent : DisposeNotifyingObject, IParent
+        public class Parent : DisposeNotifyingObject, IParent
         {
         }
 
         /// <summary>
         /// The first dependency object.
         /// </summary>
-        private class Dependency : DisposeNotifyingObject
+        public class Dependency : DisposeNotifyingObject
         {
         }
 
         /// <summary>
         /// The second dependency object.
         /// </summary>
-        private class Dependency2 : DisposeNotifyingObject
+        public class Dependency2 : DisposeNotifyingObject
         {
         }
     }
