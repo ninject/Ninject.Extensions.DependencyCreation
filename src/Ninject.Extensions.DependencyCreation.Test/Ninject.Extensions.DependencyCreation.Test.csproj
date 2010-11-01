@@ -8,7 +8,7 @@
     <ProjectGuid>{FC547AF3-7BF2-4D45-9DBC-F23BAFAFDF25}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ninject.Extensions.DependencyCreation.Test</RootNamespace>
+    <RootNamespace>Ninject.Extensions.DependencyCreation</RootNamespace>
     <AssemblyName>Ninject.Extensions.DependencyCreation.Test</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -49,11 +49,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\build\Debug\</OutputPath>
+    <OutputPath>..\..\build\release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\build\Debug\Ninject.Extensions.DependencyCreation.Test.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>

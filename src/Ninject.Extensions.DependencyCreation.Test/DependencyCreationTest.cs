@@ -1,6 +1,7 @@
 //-------------------------------------------------------------------------------
 // <copyright file="DependencyCreationTest.cs" company="bbv Software Services AG">
-//   Copyright (c) 2008 bbv Software Services AG
+//   Copyright (c) 2010 bbv Software Services AG
+//   Author: Remo Gloor remo.gloor@bbv.ch
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -16,7 +17,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.DependencyCreation.Test
+namespace Ninject.Extensions.DependencyCreation
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -26,12 +27,12 @@ namespace Ninject.Extensions.DependencyCreation.Test
 #if SILVERLIGHT_MSTEST
     using MsTest.Should;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Assert = Ninject.SilverlightTests.AssertWithThrows;
+    using Assert = AssertWithThrows;
     using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
 #else
     using UnitDriven;
     using UnitDriven.Should;
-    using Assert = Ninject.SilverlightTests.AssertWithThrows;
+    using Assert = AssertWithThrows;
     using Fact = UnitDriven.TestMethodAttribute;
 #endif
 #else
