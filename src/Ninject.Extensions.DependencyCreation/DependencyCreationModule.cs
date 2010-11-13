@@ -35,7 +35,7 @@ namespace Ninject.Extensions.DependencyCreation
         /// </summary>
         public override void Load()
         {
-            if (!this.Kernel.HasModule(typeof(ContextPreservationModule).Name))
+            if (!this.Kernel.HasModule(typeof(ContextPreservationModule).FullName))
             {
                 throw new InvalidOperationException("ContextPreservationModule is required");    
             }
