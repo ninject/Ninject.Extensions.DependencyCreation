@@ -13,6 +13,22 @@
 	<target name="all" depends="core test silverlight-test"/>
 
 	<target name="core" depends="init">
+		<property name="NoDynamicProxy" value = "false"/>
+		<property name="NoDynamicProxy" value = "true" if="${string::contains(build.platform, 'silverlight-2.0') or string::contains(build.platform, 'netcf-3.5') or string::contains(build.platform, 'wp7')}"/>
+		<property name="current.path.lib.DynamicProxy" value="${path.lib}/Castle-Windsor/net-3.5" if="${string::contains(build.platform, 'net-3.5')}" />
+		<property name="current.path.lib.DynamicProxy" value="${path.lib}/Castle-Windsor/net-4.0" if="${string::contains(build.platform, 'net-4.0')}" />
+		<property name="current.path.lib.DynamicProxy" value="${path.lib}/Castle-Windsor/silverlight-3.0" if="${string::contains(build.platform, 'silverlight-3.0')}" />
+		<property name="current.path.lib.DynamicProxy" value="${path.lib}/Castle-Windsor/silverlight-4.0" if="${string::contains(build.platform, 'silverlight-4.0')}" />
+		<property name="current.path.lib.DynamicProxy" value="${path.lib}/Castle-Windsor/net-3.5" if="${string::contains(build.platform, 'mono')}" />
+		<property name="current.path.lib.DynamicProxy" value="${path.lib}" if="${NoDynamicProxy}" />
+		
+		<copy todir="${current.path.build}/DynamicProxy/lib" unless="${NoDynamicProxy}">
+			<fileset basedir="${current.path.lib.DynamicProxy}">
+				<include name="**/*.dll"/>
+				<include name="**/*.xml"/>
+			</fileset>
+		</copy>		
+		
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" output="${current.path.build}/${product.assembly}" doc="${current.path.build}/${product.docfile}" keyfile="${path.src}/${product.keyfile}">
 			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
 			<sources basedir="${path.src}">
@@ -26,6 +42,7 @@
 				<include name="System.Web.dll" unless="${build.platform == 'silverlight-2.0'}"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
 				<include name="${path.lib}/Ninject.Extensions.ContextPreservation/${build.platform}/Ninject.Extensions.ContextPreservation.dll"/>
+				<include name="${current.path.lib.DynamicProxy}/Castle.Core.dll" unless="${NoDynamicProxy}"/>
 			</references>
 		</csc>
 	</target>
@@ -122,7 +139,10 @@
 				<include name="*.dll" />
 			</fileset>
             <fileset basedir="${path.src}/${product.name}.SilverlightTests">
-                <include name="AppManifest.xaml"/>
+                <include name="AppManifest.xaml" unless="${NoDynamicProxy}"/>
+            </fileset>
+            <fileset basedir="${path.src}/${product.name}.SilverlightTests/NoProxyAppManifest">
+                <include name="AppManifest.xaml" if="${NoDynamicProxy}"/>
             </fileset>
 		</zip>
     </target>	

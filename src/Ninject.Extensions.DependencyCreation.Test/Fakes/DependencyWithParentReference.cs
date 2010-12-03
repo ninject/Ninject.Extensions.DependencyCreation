@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------
-// <copyright file="TestInitialize.cs" company="bbv Software Services AG">
+// <copyright file="DependencyWithParentReference.cs" company="bbv Software Services AG">
 //   Copyright (c) 2010 bbv Software Services AG
 //   Author: Remo Gloor remo.gloor@bbv.ch
 //
@@ -17,15 +17,28 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.DependencyCreation.MSTestAttributes
+namespace Ninject.Extensions.DependencyCreation.Fakes
 {
-    using System;
+    using Ninject.Extensions.NamedScope;
 
     /// <summary>
-    /// Fake of the MSTest TestInitialize Attribute to reuse Tests for Silverlight.
+    /// A dependency object that has a reference to the parent.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method)]
-    public class TestInitializeAttribute : Attribute
+    public class DependencyWithParentReference : DisposeNotifyingObject
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DependencyWithParentReference"/> class.
+        /// </summary>
+        /// <param name="parent">The parent.</param>
+        public DependencyWithParentReference(IParent parent)
+        {
+            this.Parent = parent;
+        }
+
+        /// <summary>
+        /// Gets the parent.
+        /// </summary>
+        /// <value>The parent.</value>
+        public IParent Parent { get; private set; }
     }
 }

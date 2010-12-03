@@ -46,7 +46,7 @@ namespace Ninject.Extensions.DependencyCreation
             var resolutionRoot = new ContextPreservingResolutionRoot(context);
             foreach (var dependencyCreationDirective in dependencyCreationDirectives)
             {
-                resolutionRoot.Get(dependencyCreationDirective.DependencyType);
+                resolutionRoot.Get(dependencyCreationDirective.DependencyType, new DependencyCreatorParameter(reference.Instance));
             }
         }
     }

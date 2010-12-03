@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="TestClassAttribute.cs" company="bbv Software Services AG">
+// <copyright file="Dependency2.cs" company="bbv Software Services AG">
 //   Copyright (c) 2010 bbv Software Services AG
 //   Author: Remo Gloor remo.gloor@bbv.ch
 //
@@ -14,18 +14,17 @@
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
-// </copyright>>
+// </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.DependencyCreation.MSTestAttributes
+namespace Ninject.Extensions.DependencyCreation.Fakes
 {
-    using System;
+    using Ninject.Extensions.NamedScope;
 
     /// <summary>
-    /// Fake of the MSTest TestClass Attribute to reuse Tests for Silverlight.
+    /// The second dependency object.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class)]   
-    public class TestClassAttribute : Attribute
+    public class Dependency2 : DisposeNotifyingObject
     {
     }
 }

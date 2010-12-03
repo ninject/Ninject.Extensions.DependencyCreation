@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="TestClassAttribute.cs" company="bbv Software Services AG">
+// <copyright file="IParent.cs" company="bbv Software Services AG">
 //   Copyright (c) 2010 bbv Software Services AG
 //   Author: Remo Gloor remo.gloor@bbv.ch
 //
@@ -14,18 +14,25 @@
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
-// </copyright>>
+// </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.DependencyCreation.MSTestAttributes
+namespace Ninject.Extensions.DependencyCreation.Fakes
 {
-    using System;
-
     /// <summary>
-    /// Fake of the MSTest TestClass Attribute to reuse Tests for Silverlight.
+    /// Test interface for the parent.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class)]   
-    public class TestClassAttribute : Attribute
+    public interface IParent
     {
+        /// <summary>
+        /// Gets a value indicating whether Do was invoked.
+        /// </summary>
+        /// <value><c>true</c> if [do was invoked]; otherwise, <c>false</c>.</value>
+        bool DoWasInvoked { get; }
+
+        /// <summary>
+        /// A test method.
+        /// </summary>
+        void Do();
     }
 }

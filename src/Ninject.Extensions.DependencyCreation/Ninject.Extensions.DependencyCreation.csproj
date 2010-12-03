@@ -40,7 +40,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\build\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -60,7 +60,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject, Version=2.1.0.58, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\lib\Castle-Windsor\net-3.5\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=2.1.0.89, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Ninject\net-3.5\Ninject.dll</HintPath>
     </Reference>
@@ -86,6 +89,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="DependencyCreatorParameter.cs" />
     <Compile Include="DependencyCreationActivationStrategy.cs" />
     <Compile Include="DependencyCreationDirective.cs" />
     <Compile Include="DependencyCreationExtensionMethods.cs" />

@@ -73,6 +73,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\lib\Castle-Windsor\silverlight-4.0\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Silverlight.Testing">
       <HintPath>$(MSBuildExtensionsPath)\..\Microsoft SDKs\Silverlight\v4.0\Toolkit\Apr10\Testing\Microsoft.Silverlight.Testing.dll</HintPath>
     </Reference>
@@ -100,8 +103,29 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Ninject.Extensions.DependencyCreation.Test\CreatorInjectionIntoDependencyTests.cs">
+      <Link>CreatorInjectionIntoDependencyTests.cs</Link>
+    </Compile>
     <Compile Include="..\Ninject.Extensions.DependencyCreation.Test\DependencyCreationTest.cs">
       <Link>DependencyCreationTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.DependencyCreation.Test\Fakes\Dependency.cs">
+      <Link>Fakes\Dependency.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.DependencyCreation.Test\Fakes\Dependency2.cs">
+      <Link>Fakes\Dependency2.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.DependencyCreation.Test\Fakes\DependencyWithParentReference.cs">
+      <Link>Fakes\DependencyWithParentReference.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.DependencyCreation.Test\Fakes\IParent.cs">
+      <Link>Fakes\IParent.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.DependencyCreation.Test\Fakes\Parent.cs">
+      <Link>Fakes\Parent.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.DependencyCreation.Test\NamedScopeIntegrationTest.cs">
+      <Link>NamedScopeIntegrationTest.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

@@ -40,7 +40,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\build\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
@@ -96,9 +96,16 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CreatorInjectionIntoDependencyTests.cs" />
+    <Compile Include="Fakes\Dependency.cs" />
+    <Compile Include="Fakes\Dependency2.cs" />
     <Compile Include="DependencyCreationTest.cs" />
+    <Compile Include="Fakes\DependencyWithParentReference.cs" />
+    <Compile Include="Fakes\IParent.cs" />
     <Compile Include="MSTestAttributes\TestClassAttribute.cs" />
     <Compile Include="MSTestAttributes\TestInitialize.cs" />
+    <Compile Include="NamedScopeIntegrationTest.cs" />
+    <Compile Include="Fakes\Parent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +131,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

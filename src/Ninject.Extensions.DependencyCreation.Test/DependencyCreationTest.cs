@@ -19,10 +19,12 @@
 
 namespace Ninject.Extensions.DependencyCreation
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Ninject.Activation.Caching;
     using Ninject.Extensions.ContextPreservation;
-    using Ninject.Extensions.NamedScope;
+    using Ninject.Extensions.DependencyCreation.Fakes;
 #if SILVERLIGHT
 #if SILVERLIGHT_MSTEST
     using MsTest.Should;
@@ -36,7 +38,7 @@ namespace Ninject.Extensions.DependencyCreation
     using Fact = UnitDriven.TestMethodAttribute;
 #endif
 #else
-    using Ninject.Extensions.NamedScope.MSTestAttributes;
+    using Ninject.Extensions.DependencyCreation.MSTestAttributes;
     using Xunit;
     using Xunit.Should;
 #endif
@@ -47,11 +49,6 @@ namespace Ninject.Extensions.DependencyCreation
     [TestClass]
     public class DependencyCreationTest
     {
-        /// <summary>
-        /// The Name of the scope used in the tests.
-        /// </summary>
-        private const string ScopeName = "Scope";
-
         /// <summary>
         /// The kernel used in the tests.
         /// </summary>
@@ -74,13 +71,6 @@ namespace Ninject.Extensions.DependencyCreation
         }
 
         /// <summary>
-        /// Test interface for the parent.
-        /// </summary>
-        public interface IParent
-        {
-        }
-
-        /// <summary>
         /// Sets up all tests.
         /// </summary>
         [TestInitialize]
@@ -92,24 +82,25 @@ namespace Ninject.Extensions.DependencyCreation
             this.kernel = new StandardKernel();
 #endif
             this.kernel.Load(new ContextPreservationModule());
-            this.kernel.Load(new NamedScopeModule());
             this.kernel.Load(new DependencyCreationModule());
         }
-        
+
         /// <summary>
         /// Dependencies are disposed with their parent.
         /// </summary>
         [Fact]
         public void DependencyDisposedWithParent()
         {
-            this.kernel.Bind<Parent>().ToSelf().DefinesNamedScope(ScopeName);
             this.kernel.DefineDependency<Parent, Dependency>();
 
             IList<Dependency> dependencies = new List<Dependency>();
-            this.kernel.Bind<Dependency>().ToMethod(ctx => { dependencies.Add(new Dependency()); return dependencies.Last(); }).InNamedScope(ScopeName);
+            this.kernel
+                .Bind<Dependency>()
+                .ToMethod(ctx => { dependencies.Add(new Dependency()); return dependencies.Last(); })
+                .InDependencyCreatorScope();
 
-            Parent parent1 = this.kernel.Get<Parent>();
-            Parent parent2 = this.kernel.Get<Parent>();
+            var parent1 = this.kernel.Get<Parent>();
+            var parent2 = this.kernel.Get<Parent>();
             dependencies[0].IsDisposed.ShouldBeFalse();
             dependencies[1].IsDisposed.ShouldBeFalse();
 
@@ -120,6 +111,27 @@ namespace Ninject.Extensions.DependencyCreation
             parent1.Dispose();
             dependencies[0].IsDisposed.ShouldBeTrue();
         }
+    
+        /// <summary>
+        /// Dependencies are disposed with their parent.
+        /// </summary>
+        [Fact]
+        public void DependencyDisposedWhenParentIsCollected()
+        {
+            this.kernel.DefineDependency<Parent, Dependency>();
+
+            IList<Dependency> dependencies = new List<Dependency>();
+            this.kernel
+                .Bind<Dependency>().ToSelf()
+                .InDependencyCreatorScope()
+                .OnActivation(dependencies.Add);
+
+            this.kernel.Get<Parent>();
+            GC.Collect();
+            this.kernel.Components.Get<ICache>().Prune();
+            
+            dependencies[0].IsDisposed.ShouldBeTrue();
+        }
 
         /// <summary>
         /// The dependencies are created even if they are defined by a interface
@@ -128,11 +140,13 @@ namespace Ninject.Extensions.DependencyCreation
         [Fact]
         public void ParentResolvableByInterface()
         {
-            this.kernel.Bind<Parent>().ToSelf().DefinesNamedScope(ScopeName);
             this.kernel.DefineDependency<IParent, Dependency>();
 
             bool dependencyCreated = false;
-            this.kernel.Bind<Dependency>().ToMethod(ctx => { dependencyCreated = true; return new Dependency(); }).InNamedScope(ScopeName);
+            this.kernel
+                .Bind<Dependency>().ToSelf()
+                .InDependencyCreatorScope()
+                .OnActivation(instance => dependencyCreated = true);
 
             this.kernel.Get<Parent>();
 
@@ -145,16 +159,21 @@ namespace Ninject.Extensions.DependencyCreation
         [Fact]
         public void MultipleDependenciesCanBeCreated()
         {
-            this.kernel.Bind<Parent>().ToSelf().DefinesNamedScope(ScopeName);
             this.kernel.DefineDependency<IParent, Dependency>();
             this.kernel.DefineDependency<IParent, Dependency2>();
 
             Dependency dependency1 = null;
             Dependency2 dependency2 = null;
-            this.kernel.Bind<Dependency>().ToMethod(ctx => { dependency1 = new Dependency(); return dependency1; }).InNamedScope(ScopeName);
-            this.kernel.Bind<Dependency2>().ToMethod(ctx => { dependency2 = new Dependency2(); return dependency2; }).InNamedScope(ScopeName);
+            this.kernel
+                .Bind<Dependency>().ToSelf()
+                .InDependencyCreatorScope()
+                .OnActivation(instance => dependency1 = instance);
+            this.kernel
+                .Bind<Dependency2>().ToSelf()
+                .InDependencyCreatorScope()
+                .OnActivation(instance => dependency2 = instance);
 
-            Parent parent = this.kernel.Get<Parent>();
+            var parent = this.kernel.Get<Parent>();
             parent.Dispose();
 
             dependency1.ShouldNotBeNull();
@@ -169,43 +188,27 @@ namespace Ninject.Extensions.DependencyCreation
         [Fact]
         public void NestedDependenciesCanBeCreated()
         {
-            this.kernel.Bind<Parent>().ToSelf().DefinesNamedScope(ScopeName);
             this.kernel.DefineDependency<IParent, Dependency>();
             this.kernel.DefineDependency<Dependency, Dependency2>();
 
             Dependency dependency1 = null;
             Dependency2 dependency2 = null;
-            this.kernel.Bind<Dependency>().ToMethod(ctx => { dependency1 = new Dependency(); return dependency1; }).InNamedScope(ScopeName);
-            this.kernel.Bind<Dependency2>().ToMethod(ctx => { dependency2 = new Dependency2(); return dependency2; }).InNamedScope(ScopeName);
+            this.kernel
+                .Bind<Dependency>().ToSelf()
+                .InDependencyCreatorScope()
+                .OnActivation(instance => dependency1 = instance);
+            this.kernel
+                .Bind<Dependency2>().ToSelf()
+                .InDependencyCreatorScope()
+                .OnActivation(instance => dependency2 = instance);
 
-            Parent parent = this.kernel.Get<Parent>();
+            var parent = this.kernel.Get<Parent>();
             parent.Dispose();
 
             dependency1.ShouldNotBeNull();
             dependency2.ShouldNotBeNull();
             dependency1.IsDisposed.ShouldBeTrue();
             dependency2.IsDisposed.ShouldBeTrue();
-        }
-
-        /// <summary>
-        /// The parent object.
-        /// </summary>
-        public class Parent : DisposeNotifyingObject, IParent
-        {
-        }
-
-        /// <summary>
-        /// The first dependency object.
-        /// </summary>
-        public class Dependency : DisposeNotifyingObject
-        {
-        }
-
-        /// <summary>
-        /// The second dependency object.
-        /// </summary>
-        public class Dependency2 : DisposeNotifyingObject
-        {
         }
     }
 }
