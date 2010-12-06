@@ -3,7 +3,7 @@ This module is used to create a dependency toghether with another object without
 Example:
 this.kernel.Bind<IParent>().To<Parent>();
 this.kernel.DefineDependency<IParent, Dependency>();
-this.kernel.Bind<Dependency>().ToSelf().InCreatorScope(ScopeName);
+this.kernel.Bind<Dependency>().ToSelf().InCreatorScope();
 
 Parent parent = this.kernel.Get<Parent>();
 
@@ -15,7 +15,7 @@ There are some very rare cases where the dependency gets created before the one 
 
 this.kernel.Bind<View>().ToSelf();
 this.kernel.DefineDependency<View, Presenter();
-this.kernel.Bind<Presenter>().ToSelf().WithCreatorAsConstructorArgument("view").InCreatorScope(ScopeName);
+this.kernel.Bind<Presenter>().ToSelf().WithCreatorAsConstructorArgument("view").InCreatorScope();
 
 public class Presenter
 {
