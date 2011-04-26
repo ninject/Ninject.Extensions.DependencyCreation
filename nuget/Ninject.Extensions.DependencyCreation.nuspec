@@ -9,6 +9,9 @@
     <description>Extension for Ninject used to create a dependency toghether with another object without having a reference to it</description>
     <summary></summary>
     <language>en-US</language>
+	<tags>Ninject ioc di</tags>
+	<iconUrl>https://github.com/ninject/ninject/raw/master/logos/Ninject-Logo32.png</iconUrl>
+	<projectUrl>http://www.ninject.org</projectUrl>
     <dependencies>
       <dependency id="Ninject" version="" />
       <dependency id="Ninject.Extensions.ContextPreservation" version="" />
