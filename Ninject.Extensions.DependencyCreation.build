@@ -11,6 +11,7 @@
 
 	<include buildfile="Ninject.include" />
 	<target name="all" depends="core test silverlight-test"/>
+	<target name="nuget-all" depends="nuget"/>
 
 	<target name="core" depends="init">
 		<property name="NoDynamicProxy" value = "false"/>
