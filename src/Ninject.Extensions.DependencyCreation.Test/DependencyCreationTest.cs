@@ -25,28 +25,12 @@ namespace Ninject.Extensions.DependencyCreation
     using Ninject.Activation.Caching;
     using Ninject.Extensions.ContextPreservation;
     using Ninject.Extensions.DependencyCreation.Fakes;
-#if SILVERLIGHT
-#if SILVERLIGHT_MSTEST
-    using MsTest.Should;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Assert = AssertWithThrows;
-    using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-#else
-    using UnitDriven;
-    using UnitDriven.Should;
-    using Assert = AssertWithThrows;
-    using Fact = UnitDriven.TestMethodAttribute;
-#endif
-#else
-    using Ninject.Extensions.DependencyCreation.MSTestAttributes;
     using Xunit;
     using Xunit.Should;
-#endif
 
     /// <summary>
     /// Integration Test for Dependency Creation Module.
     /// </summary>
-    [TestClass]
     public class DependencyCreationTest
     {
         /// <summary>
@@ -59,7 +43,13 @@ namespace Ninject.Extensions.DependencyCreation
         /// </summary>
         public DependencyCreationTest()
         {
-            this.SetUp();
+#if !SILVERLIGHT
+            this.kernel = new StandardKernel(new NinjectSettings { LoadExtensions = false });
+#else
+            this.kernel = new StandardKernel();
+#endif
+            this.kernel.Load(new ContextPreservationModule());
+            this.kernel.Load(new DependencyCreationModule());
         }
 
         /// <summary>
@@ -68,21 +58,6 @@ namespace Ninject.Extensions.DependencyCreation
         ~DependencyCreationTest()
         {
             this.kernel.Dispose();
-        }
-
-        /// <summary>
-        /// Sets up all tests.
-        /// </summary>
-        [TestInitialize]
-        public void SetUp()
-        {
-#if !SILVERLIGHT
-            this.kernel = new StandardKernel(new NinjectSettings { LoadExtensions = false });
-#else
-            this.kernel = new StandardKernel();
-#endif
-            this.kernel.Load(new ContextPreservationModule());
-            this.kernel.Load(new DependencyCreationModule());
         }
 
         /// <summary>

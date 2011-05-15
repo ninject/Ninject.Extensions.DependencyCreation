@@ -28,56 +28,23 @@ namespace Ninject.Extensions.DependencyCreation
     using Ninject.Activation.Caching;
     using Ninject.Extensions.ContextPreservation;
     using Ninject.Extensions.DependencyCreation.Fakes;
-#if SILVERLIGHT
-#if SILVERLIGHT_MSTEST
-    using MsTest.Should;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Assert = AssertWithThrows;
-    using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-#else
-    using UnitDriven;
-    using UnitDriven.Should;
-    using Assert = AssertWithThrows;
-    using Fact = UnitDriven.TestMethodAttribute;
-#endif
-#else
-    using Ninject.Extensions.DependencyCreation.MSTestAttributes;
     using Xunit;
     using Xunit.Should;
-#endif
 
     /// <summary>
     /// Tests dependencies that get an instance of the object that requested their creation.
     /// </summary>
-    [TestClass]
     public class CreatorInjectionIntoDependencyTests
     {
         /// <summary>
         /// The kernel used in the tests.
         /// </summary>
-        private IKernel kernel;
+        private readonly IKernel kernel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatorInjectionIntoDependencyTests"/> class.
         /// </summary>
         public CreatorInjectionIntoDependencyTests()
-        {
-            this.SetUp();
-        }
-
-        /// <summary>
-        /// Finalizes an instance of the <see cref="CreatorInjectionIntoDependencyTests"/> class.
-        /// </summary>
-        ~CreatorInjectionIntoDependencyTests()
-        {
-            this.kernel.Dispose();
-        }
-
-        /// <summary>
-        /// Sets up all tests.
-        /// </summary>
-        [TestInitialize]
-        public void SetUp()
         {
 #if !SILVERLIGHT
             this.kernel = new StandardKernel(new NinjectSettings { LoadExtensions = false });
@@ -86,6 +53,14 @@ namespace Ninject.Extensions.DependencyCreation
 #endif
             this.kernel.Load(new ContextPreservationModule());
             this.kernel.Load(new DependencyCreationModule());
+        }
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="CreatorInjectionIntoDependencyTests"/> class.
+        /// </summary>
+        ~CreatorInjectionIntoDependencyTests()
+        {
+            this.kernel.Dispose();
         }
 
         /// <summary>

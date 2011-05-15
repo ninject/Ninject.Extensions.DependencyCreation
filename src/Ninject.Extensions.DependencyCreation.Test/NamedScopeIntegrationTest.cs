@@ -23,31 +23,13 @@ namespace Ninject.Extensions.DependencyCreation
     using System.Linq;
     using Ninject.Extensions.ContextPreservation;
     using Ninject.Extensions.DependencyCreation.Fakes;
-#if SILVERLIGHT
-#if SILVERLIGHT_MSTEST
-    using MsTest.Should;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Ninject.Extensions.NamedScope;
-    using Assert = AssertWithThrows;
-    using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-#else
-    using Ninject.Extensions.NamedScope;
-    using UnitDriven;
-    using UnitDriven.Should;
-    using Assert = AssertWithThrows;
-    using Fact = UnitDriven.TestMethodAttribute;
-#endif
-#else
-    using Ninject.Extensions.DependencyCreation.MSTestAttributes;
     using Ninject.Extensions.NamedScope;
     using Xunit;
     using Xunit.Should;
-#endif
 
     /// <summary>
     /// Integration Test for Dependency Creation Module.
     /// </summary>
-    [TestClass]
     public class NamedScopeIntegrationTest
     {
         /// <summary>
@@ -65,23 +47,6 @@ namespace Ninject.Extensions.DependencyCreation
         /// </summary>
         public NamedScopeIntegrationTest()
         {
-            this.SetUp();
-        }
-
-        /// <summary>
-        /// Finalizes an instance of the <see cref="NamedScopeIntegrationTest"/> class.
-        /// </summary>
-        ~NamedScopeIntegrationTest()
-        {
-            this.kernel.Dispose();
-        }
-
-        /// <summary>
-        /// Sets up all tests.
-        /// </summary>
-        [TestInitialize]
-        public void SetUp()
-        {
 #if !SILVERLIGHT
             this.kernel = new StandardKernel(new NinjectSettings { LoadExtensions = false });
 #else
@@ -90,6 +55,14 @@ namespace Ninject.Extensions.DependencyCreation
             this.kernel.Load(new ContextPreservationModule());
             this.kernel.Load(new NamedScopeModule());
             this.kernel.Load(new DependencyCreationModule());
+        }
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="NamedScopeIntegrationTest"/> class.
+        /// </summary>
+        ~NamedScopeIntegrationTest()
+        {
+            this.kernel.Dispose();
         }
 
         /// <summary>
