@@ -21,12 +21,14 @@ namespace Ninject.Extensions.DependencyCreation
 {
     using System.Collections.Generic;
     using System.Linq;
+
+    using FluentAssertions;
+
     using Ninject.Extensions.ContextPreservation;
     using Ninject.Extensions.DependencyCreation.Fakes;
     using Ninject.Extensions.NamedScope;
     using Xunit;
-    using Xunit.Should;
-
+    
     /// <summary>
     /// Integration Test for Dependency Creation Module.
     /// </summary>
@@ -79,15 +81,15 @@ namespace Ninject.Extensions.DependencyCreation
 
             var parent1 = this.kernel.Get<Parent>();
             var parent2 = this.kernel.Get<Parent>();
-            dependencies[0].IsDisposed.ShouldBeFalse();
-            dependencies[1].IsDisposed.ShouldBeFalse();
+            dependencies[0].IsDisposed.Should().BeFalse();
+            dependencies[1].IsDisposed.Should().BeFalse();
 
             parent2.Dispose();
-            dependencies[0].IsDisposed.ShouldBeFalse();
-            dependencies[1].IsDisposed.ShouldBeTrue();
+            dependencies[0].IsDisposed.Should().BeFalse();
+            dependencies[1].IsDisposed.Should().BeTrue();
 
             parent1.Dispose();
-            dependencies[0].IsDisposed.ShouldBeTrue();
+            dependencies[0].IsDisposed.Should().BeTrue();
         }
     }
 }

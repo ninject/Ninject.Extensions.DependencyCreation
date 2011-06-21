@@ -25,12 +25,14 @@
 namespace Ninject.Extensions.DependencyCreation
 {
     using System;
+
+    using FluentAssertions;
+
     using Ninject.Activation.Caching;
     using Ninject.Extensions.ContextPreservation;
     using Ninject.Extensions.DependencyCreation.Fakes;
     using Xunit;
-    using Xunit.Should;
-
+    
     /// <summary>
     /// Tests dependencies that get an instance of the object that requested their creation.
     /// </summary>
@@ -80,14 +82,14 @@ namespace Ninject.Extensions.DependencyCreation
 
             var parent = this.kernel.Get<Parent>();
 
-            parent.ShouldNotBeNull();
-            dependency.IsDisposed.ShouldBeFalse();
+            parent.Should().NotBeNull();
+            dependency.IsDisposed.Should().BeFalse();
 
             parent = null;
             GC.Collect();
             this.kernel.Components.Get<ICache>().Prune();
 
-            dependency.IsDisposed.ShouldBeTrue();
+            dependency.IsDisposed.Should().BeTrue();
         }
 
         /// <summary>
@@ -109,8 +111,8 @@ namespace Ninject.Extensions.DependencyCreation
             var parent = this.kernel.Get<Parent>();
             dependency.Parent.Do();
 
-            dependency.Parent.ShouldNotBe(parent);
-            parent.DoWasInvoked.ShouldBeTrue();
+            dependency.Parent.Should().NotBe(parent);
+            parent.DoWasInvoked.Should().BeTrue();
         }
     }
 }

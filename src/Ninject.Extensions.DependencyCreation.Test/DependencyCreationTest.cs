@@ -22,12 +22,14 @@ namespace Ninject.Extensions.DependencyCreation
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using FluentAssertions;
+
     using Ninject.Activation.Caching;
     using Ninject.Extensions.ContextPreservation;
     using Ninject.Extensions.DependencyCreation.Fakes;
     using Xunit;
-    using Xunit.Should;
-
+    
     /// <summary>
     /// Integration Test for Dependency Creation Module.
     /// </summary>
@@ -76,15 +78,15 @@ namespace Ninject.Extensions.DependencyCreation
 
             var parent1 = this.kernel.Get<Parent>();
             var parent2 = this.kernel.Get<Parent>();
-            dependencies[0].IsDisposed.ShouldBeFalse();
-            dependencies[1].IsDisposed.ShouldBeFalse();
+            dependencies[0].IsDisposed.Should().BeFalse();
+            dependencies[1].IsDisposed.Should().BeFalse();
 
             parent2.Dispose();
-            dependencies[0].IsDisposed.ShouldBeFalse();
-            dependencies[1].IsDisposed.ShouldBeTrue();
+            dependencies[0].IsDisposed.Should().BeFalse();
+            dependencies[1].IsDisposed.Should().BeTrue();
 
             parent1.Dispose();
-            dependencies[0].IsDisposed.ShouldBeTrue();
+            dependencies[0].IsDisposed.Should().BeTrue();
         }
     
         /// <summary>
@@ -104,8 +106,8 @@ namespace Ninject.Extensions.DependencyCreation
             this.kernel.Get<Parent>();
             GC.Collect();
             this.kernel.Components.Get<ICache>().Prune();
-            
-            dependencies[0].IsDisposed.ShouldBeTrue();
+
+            dependencies[0].IsDisposed.Should().BeTrue();
         }
 
         /// <summary>
@@ -125,7 +127,7 @@ namespace Ninject.Extensions.DependencyCreation
 
             this.kernel.Get<Parent>();
 
-            dependencyCreated.ShouldBeTrue();
+            dependencyCreated.Should().BeTrue();
         }
 
         /// <summary>
@@ -151,10 +153,10 @@ namespace Ninject.Extensions.DependencyCreation
             var parent = this.kernel.Get<Parent>();
             parent.Dispose();
 
-            dependency1.ShouldNotBeNull();
-            dependency2.ShouldNotBeNull();
-            dependency1.IsDisposed.ShouldBeTrue();
-            dependency2.IsDisposed.ShouldBeTrue();
+            dependency1.Should().NotBeNull();
+            dependency2.Should().NotBeNull();
+            dependency1.IsDisposed.Should().BeTrue();
+            dependency2.IsDisposed.Should().BeTrue();
         }
 
         /// <summary>
@@ -180,10 +182,10 @@ namespace Ninject.Extensions.DependencyCreation
             var parent = this.kernel.Get<Parent>();
             parent.Dispose();
 
-            dependency1.ShouldNotBeNull();
-            dependency2.ShouldNotBeNull();
-            dependency1.IsDisposed.ShouldBeTrue();
-            dependency2.IsDisposed.ShouldBeTrue();
+            dependency1.Should().NotBeNull();
+            dependency2.Should().NotBeNull();
+            dependency1.IsDisposed.Should().BeTrue();
+            dependency2.IsDisposed.Should().BeTrue();
         }
     }
 }
