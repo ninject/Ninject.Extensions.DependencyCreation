@@ -48,13 +48,11 @@ namespace Ninject.Extensions.DependencyCreation
         /// </summary>
         public CreatorInjectionIntoDependencyTests()
         {
-#if !SILVERLIGHT
-            this.kernel = new StandardKernel(new NinjectSettings { LoadExtensions = false });
-#else
             this.kernel = new StandardKernel();
-#endif
+#if SILVERLIGHT
             this.kernel.Load(new ContextPreservationModule());
             this.kernel.Load(new DependencyCreationModule());
+#endif
         }
 
         /// <summary>

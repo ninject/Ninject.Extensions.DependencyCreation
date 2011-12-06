@@ -35,13 +35,19 @@ namespace Ninject.Extensions.DependencyCreation
         /// </summary>
         public override void Load()
         {
-            if (!this.Kernel.HasModule(typeof(ContextPreservationModule).FullName))
-            {
-                throw new InvalidOperationException("ContextPreservationModule is required");    
-            }
-
             this.Kernel.Components.Add<IPlanningStrategy, DependencyCreationPlanningStrategy>();
             this.Kernel.Components.Add<IActivationStrategy, DependencyCreationActivationStrategy>();
+        }
+
+        /// <summary>
+        /// Called after loading the modules. A module can verify here if all other required modules are loaded.
+        /// </summary>
+        public override void VerifyRequiredModulesAreLoaded()
+        {
+            if (!this.Kernel.HasModule(typeof(ContextPreservationModule).FullName))
+            {
+                throw new InvalidOperationException("ContextPreservationModule is required");
+            }
         }
     }
 }
