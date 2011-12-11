@@ -63,6 +63,7 @@ namespace Ninject.Extensions.DependencyCreation
             this.kernel.Dispose();
         }
 
+#if !MONO // GC related tests do not work properly on mono
         /// <summary>
         /// Dependencies are disposed with their parent.
         /// </summary>
@@ -89,6 +90,7 @@ namespace Ninject.Extensions.DependencyCreation
 
             dependency.IsDisposed.Should().BeTrue();
         }
+#endif
 
         /// <summary>
         /// If WithCreatorAsConstructorArgument is configured the dependency gets a proxy to the creator

@@ -38,7 +38,7 @@ namespace Ninject.Extensions.DependencyCreation
         /// <summary>
         /// The kernel used in the tests.
         /// </summary>
-        private IKernel kernel;
+        private readonly IKernel kernel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DependencyCreationTest"/> class.
@@ -86,7 +86,8 @@ namespace Ninject.Extensions.DependencyCreation
             parent1.Dispose();
             dependencies[0].IsDisposed.Should().BeTrue();
         }
-    
+
+#if !MONO // GC related tests do not work properly on mono
         /// <summary>
         /// Dependencies are disposed with their parent.
         /// </summary>
@@ -107,6 +108,7 @@ namespace Ninject.Extensions.DependencyCreation
 
             dependencies[0].IsDisposed.Should().BeTrue();
         }
+#endif
 
         /// <summary>
         /// The dependencies are created even if they are defined by a interface
