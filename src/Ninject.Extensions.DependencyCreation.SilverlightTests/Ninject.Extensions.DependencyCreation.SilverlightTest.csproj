@@ -74,7 +74,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
-      <HintPath>..\..\lib\Castle-Windsor\silverlight-4.0\Castle.Core.dll</HintPath>
+      <HintPath>..\..\lib\Castle-DynamicProxy\silverlight-4.0\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="FluentAssertions.Silverlight">
       <HintPath>..\..\tools\FluentAssertions\Silverlight-4.0\FluentAssertions.Silverlight.dll</HintPath>
