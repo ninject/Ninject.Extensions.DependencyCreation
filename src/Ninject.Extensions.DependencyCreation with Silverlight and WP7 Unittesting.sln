@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation", "Ninject.Extensions.DependencyCreation\Ninject.Extensions.DependencyCreation.csproj", "{E47C6CD3-F960-46AE-81F0-CF24FD4A3EB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation.Test", "Ninject.Extensions.DependencyCreation.Test\Ninject.Extensions.DependencyCreation.Test.csproj", "{FC547AF3-7BF2-4D45-9DBC-F23BAFAFDF25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation.SilverlightTest", "Ninject.Extensions.DependencyCreation.SilverlightTests\Ninject.Extensions.DependencyCreation.SilverlightTest.csproj", "{AA905C0A-982D-4761-85A6-2C4E6209B2AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation.WindowsPhone7Tests", "Ninject.Extensions.DependencyCreation.WindowsPhone7Tests\Ninject.Extensions.DependencyCreation.WindowsPhone7Tests.csproj", "{BECDA738-C474-4D79-AC0F-6CBEEEAD183F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E47C6CD3-F960-46AE-81F0-CF24FD4A3EB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E47C6CD3-F960-46AE-81F0-CF24FD4A3EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E47C6CD3-F960-46AE-81F0-CF24FD4A3EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E47C6CD3-F960-46AE-81F0-CF24FD4A3EB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC547AF3-7BF2-4D45-9DBC-F23BAFAFDF25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC547AF3-7BF2-4D45-9DBC-F23BAFAFDF25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC547AF3-7BF2-4D45-9DBC-F23BAFAFDF25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC547AF3-7BF2-4D45-9DBC-F23BAFAFDF25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA905C0A-982D-4761-85A6-2C4E6209B2AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA905C0A-982D-4761-85A6-2C4E6209B2AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA905C0A-982D-4761-85A6-2C4E6209B2AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA905C0A-982D-4761-85A6-2C4E6209B2AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BECDA738-C474-4D79-AC0F-6CBEEEAD183F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BECDA738-C474-4D79-AC0F-6CBEEEAD183F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BECDA738-C474-4D79-AC0F-6CBEEEAD183F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BECDA738-C474-4D79-AC0F-6CBEEEAD183F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BECDA738-C474-4D79-AC0F-6CBEEEAD183F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BECDA738-C474-4D79-AC0F-6CBEEEAD183F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
