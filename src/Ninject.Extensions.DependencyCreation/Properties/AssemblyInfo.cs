@@ -25,6 +25,7 @@ using System.Security;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Ninject.Extensions.DependencyCreation")]
+[assembly: AssemblyDescriptionAttribute("Extension for Ninject used to create a dependency toghether with another object without having a reference to it.")]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("10fa13f0-4df6-4652-83a9-94a0e8421907")]
