@@ -15,6 +15,7 @@
       <dependency id="Ninject" version="" />
       <dependency id="Ninject.Extensions.ContextPreservation" version="" />
       <dependency id="Ninject.Extensions.NamedScope" version="" />
+      <dependency id="Castle.Core" version="[3.0.0.4001,3.1.0.0)" />
     </dependencies> 
   </metadata>
 </package>
