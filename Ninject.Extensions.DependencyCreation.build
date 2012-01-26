@@ -122,7 +122,7 @@
 				<include name="AppManifest.xaml" if="${NoDynamicProxy and (string::contains(build.platform, 'silverlight-4.0') or string::contains(build.platform, 'silverlight-5.0'))}"/>
 			</fileset>
 			<fileset basedir="${path.src}/${product.name}.SilverlightTests/Silverlight3">
-				<include name="AppManifest.xaml" unless="${NoDynamicProxy and string::contains(build.platform, 'silverlight-4.0') or string::contains(build.platform, 'silverlight-5.0')}"/>
+				<include name="AppManifest.xaml" unless="${NoDynamicProxy or string::contains(build.platform, 'silverlight-4.0') or string::contains(build.platform, 'silverlight-5.0')}"/>
 			</fileset>
 			<fileset basedir="${path.src}/${product.name}.SilverlightTests/NoProxyAppManifest.Silverlight3">
 				<include name="AppManifest.xaml" if="${NoDynamicProxy}" unless="${string::contains(build.platform, 'silverlight-4.0') or string::contains(build.platform, 'silverlight-5.0')}"/>
