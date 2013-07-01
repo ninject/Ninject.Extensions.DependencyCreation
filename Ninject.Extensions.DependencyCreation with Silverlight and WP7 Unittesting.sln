@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation", "Ninject.Extensions.DependencyCreation\Ninject.Extensions.DependencyCreation.csproj", "{E47C6CD3-F960-46AE-81F0-CF24FD4A3EB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation", "src\Ninject.Extensions.DependencyCreation\Ninject.Extensions.DependencyCreation.csproj", "{E47C6CD3-F960-46AE-81F0-CF24FD4A3EB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation.Test", "Ninject.Extensions.DependencyCreation.Test\Ninject.Extensions.DependencyCreation.Test.csproj", "{FC547AF3-7BF2-4D45-9DBC-F23BAFAFDF25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation.Test", "src\Ninject.Extensions.DependencyCreation.Test\Ninject.Extensions.DependencyCreation.Test.csproj", "{FC547AF3-7BF2-4D45-9DBC-F23BAFAFDF25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation.SilverlightTest", "Ninject.Extensions.DependencyCreation.SilverlightTests\Ninject.Extensions.DependencyCreation.SilverlightTest.csproj", "{AA905C0A-982D-4761-85A6-2C4E6209B2AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation.SilverlightTest", "src\Ninject.Extensions.DependencyCreation.SilverlightTests\Ninject.Extensions.DependencyCreation.SilverlightTest.csproj", "{AA905C0A-982D-4761-85A6-2C4E6209B2AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation.WindowsPhone7Tests", "Ninject.Extensions.DependencyCreation.WindowsPhone7Tests\Ninject.Extensions.DependencyCreation.WindowsPhone7Tests.csproj", "{BECDA738-C474-4D79-AC0F-6CBEEEAD183F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.DependencyCreation.WindowsPhone7Tests", "src\Ninject.Extensions.DependencyCreation.WindowsPhone7Tests\Ninject.Extensions.DependencyCreation.WindowsPhone7Tests.csproj", "{BECDA738-C474-4D79-AC0F-6CBEEEAD183F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
